@@ -27,73 +27,142 @@ require_once __DIR__ . '/../app/includes/header.php';
 ?>
 
 <div class="container py-4 py-md-5">
-    <!-- Hero Section -->
-    <div class="row align-items-center g-4 py-3 py-lg-4 mb-4">
-        <div class="col-lg-7">
-            <div class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
-                <i class="bi bi-shield-lock me-1"></i> Transparent &bull; Tamper-Resistant &bull; Secret Ballot
-            </div>
-            <h1 class="display-5 fw-bold text-dark lh-sm mb-3">
-                Empowering Student Voices Through Secure Campus Elections
-            </h1>
-            <p class="lead text-secondary mb-4">
-                The official College Voting System delivers an audited, transaction-safe election platform. Cast your vote securely, review verified candidate manifestos, and track certified election turnout.
-            </p>
-            <div class="d-flex flex-wrap gap-2">
-                <?php if (Auth::check()): ?>
-                    <a href="<?= Auth::isAdmin() ? admin_url('dashboard.php') : public_url('dashboard.php') ?>" class="btn btn-navy btn-lg px-4 shadow-sm">
-                        <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard
-                    </a>
-                <?php else: ?>
-                    <a href="<?= base_url('login.php') ?>" class="btn btn-navy btn-lg px-4 shadow-sm">
-                        <i class="bi bi-box-arrow-in-right me-2"></i> Sign In to Vote
-                    </a>
-                    <a href="<?= base_url('register.php') ?>" class="btn btn-outline-secondary btn-lg px-4">
-                        Register Account
-                    </a>
-                <?php endif; ?>
-                <a href="<?= base_url('results.php') ?>" class="btn btn-light btn-lg border px-4">
-                    <i class="bi bi-trophy me-2 text-warning"></i> View Results
-                </a>
-            </div>
-        </div>
+    <!-- Hero Section with Animation & Dynamic Metrics -->
+    <div class="hero-wrapper position-relative">
+        <div class="hero-glow-blob-1"></div>
+        <div class="hero-glow-blob-2"></div>
 
-        <div class="col-lg-5">
-            <div class="card card-academic p-4 shadow-sm">
-                <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
-                    <i class="bi bi-bar-chart-fill text-primary"></i> Election Commission Metrics
-                </h5>
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="p-3 bg-light rounded-3 text-center">
-                            <div class="fs-3 fw-bold text-dark"><?= $stats['open_elections'] ?></div>
-                            <div class="text-muted small fw-medium">Active Elections</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-3 bg-light rounded-3 text-center">
-                            <div class="fs-3 fw-bold text-success"><?= $stats['total_votes'] ?></div>
-                            <div class="text-muted small fw-medium">Verified Ballots Cast</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-3 bg-light rounded-3 text-center">
-                            <div class="fs-3 fw-bold text-info"><?= $stats['completed_elections'] ?></div>
-                            <div class="text-muted small fw-medium">Completed Polls</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-3 bg-light rounded-3 text-center">
-                            <div class="fs-3 fw-bold text-warning"><?= $stats['scheduled_elections'] ?></div>
-                            <div class="text-muted small fw-medium">Upcoming Elections</div>
-                        </div>
-                    </div>
+        <div class="row align-items-center g-4 position-relative" style="z-index: 1;">
+            <div class="col-lg-7">
+                <div class="hero-animate-badge mb-3">
+                    <span class="badge bg-white text-primary border px-3 py-2 rounded-pill fw-semibold shadow-sm d-inline-flex align-items-center gap-2">
+                        <span class="pulse-radar-dot"></span>
+                        <span>Transparent &bull; Tamper-Resistant &bull; Secret Ballot</span>
+                    </span>
                 </div>
+                <h1 class="display-5 fw-bold hero-gradient-text lh-sm mb-3 hero-animate-title">
+                    Empowering Student Voices Through Secure Campus Elections
+                </h1>
+                <p class="lead text-secondary mb-4 hero-animate-lead" style="max-width: 620px;">
+                    The official College Voting System delivers an audited, transaction-safe election platform. Cast your vote securely, review verified candidate manifestos, and track certified live election turnout.
+                </p>
+                <div class="d-flex flex-wrap gap-2 hero-animate-actions">
+                    <?php if (Auth::check()): ?>
+                        <a href="<?= Auth::isAdmin() ? admin_url('dashboard.php') : public_url('dashboard.php') ?>" class="btn btn-navy btn-lg px-4 shadow-sm">
+                            <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= public_url('login.php') ?>" class="btn btn-navy btn-lg px-4 shadow-sm">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Sign In to Vote
+                        </a>
+                        <a href="<?= public_url('register.php') ?>" class="btn btn-outline-secondary btn-lg px-4 bg-white">
+                            Register Account
+                        </a>
+                    <?php endif; ?>
+                    <a href="<?= public_url('results.php') ?>" class="btn btn-light btn-lg border px-4 shadow-sm">
+                        <i class="bi bi-trophy me-2 text-warning"></i> View Results
+                    </a>
+                </div>
+            </div>
 
-                <hr class="my-3">
-                <div class="small text-muted d-flex align-items-center gap-2">
-                    <i class="bi bi-check2-circle text-success fs-5"></i>
-                    <span>All votes protected with database-level uniqueness constraints and decoupled ballot tokens.</span>
+            <div class="col-lg-5 hero-animate-visual">
+                <div class="hero-visual-card p-4">
+                    <!-- Floating Micro-badges -->
+                    <div class="hero-float-badge hero-float-badge-1">
+                        <i class="bi bi-shield-check text-success fs-6"></i>
+                        <span>100% Secret Ballot</span>
+                    </div>
+                    <div class="hero-float-badge hero-float-badge-2">
+                        <span class="pulse-radar-dot"></span>
+                        <span>Live Turnout Tracking</span>
+                    </div>
+
+                    <!-- Animated Ballot Illustration -->
+                    <svg class="hero-svg-illustration mb-3" viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1e3a8a"/>
+                                <stop offset="100%" stop-color="#0f172a"/>
+                            </linearGradient>
+                            <linearGradient id="slotGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0b1329"/>
+                                <stop offset="100%" stop-color="#1e293b"/>
+                            </linearGradient>
+                            <linearGradient id="paperGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="100%" stop-color="#f8fafc"/>
+                            </linearGradient>
+                            <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#3b82f6"/>
+                                <stop offset="100%" stop-color="#10b981"/>
+                            </linearGradient>
+                            <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.18"/>
+                            </filter>
+                        </defs>
+                        <!-- Background concentric security orbit ring -->
+                        <circle class="anim-glow-ring" cx="140" cy="115" r="62" stroke="url(#accentGrad)" stroke-width="2" stroke-dasharray="6 8" opacity="0.4"/>
+                        
+                        <!-- Ballot Box Body -->
+                        <rect x="50" y="82" width="180" height="88" rx="14" fill="url(#boxGrad)" filter="url(#cardShadow)"/>
+                        
+                        <!-- Top Accent Line on Box -->
+                        <rect x="50" y="82" width="180" height="4" rx="2" fill="url(#accentGrad)"/>
+                        
+                        <!-- Slot on Top Lid -->
+                        <rect x="85" y="90" width="110" height="7" rx="3.5" fill="url(#slotGrad)"/>
+                        
+                        <!-- Animated Ballot Paper Dipping into Slot -->
+                        <g class="anim-ballot-paper">
+                            <rect x="105" y="30" width="70" height="66" rx="6" fill="url(#paperGrad)" stroke="#cbd5e1" stroke-width="1.5" filter="url(#cardShadow)"/>
+                            <!-- Voting Lines on Paper -->
+                            <line x1="117" y1="44" x2="135" y2="44" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="117" y1="52" x2="145" y2="52" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="117" y1="60" x2="130" y2="60" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Verified Check Badge on Paper -->
+                            <circle cx="157" cy="48" r="9" fill="#10b981"/>
+                            <path d="M153 48L156 51L162 45" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+
+                        <!-- Front Seal Emblem on Box -->
+                        <g class="anim-pulse-check">
+                            <circle cx="140" cy="132" r="18" fill="rgba(255,255,255,0.12)" stroke="url(#accentGrad)" stroke-width="2"/>
+                            <path d="M133 132L138 137L148 127" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                    </svg>
+
+                    <!-- Animated Metrics Grid -->
+                    <div class="row g-2 pt-2">
+                        <div class="col-6">
+                            <div class="hero-stat-card text-center">
+                                <div class="hero-stat-number text-primary hero-counter" data-target="<?= (int)$stats['open_elections'] ?>">0</div>
+                                <div class="text-muted small fw-medium">Active Elections</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-stat-card text-center">
+                                <div class="hero-stat-number text-success hero-counter" data-target="<?= (int)$stats['total_votes'] ?>">0</div>
+                                <div class="text-muted small fw-medium">Verified Ballots</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-stat-card text-center">
+                                <div class="hero-stat-number text-info hero-counter" data-target="<?= (int)$stats['completed_elections'] ?>">0</div>
+                                <div class="text-muted small fw-medium">Completed Polls</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="hero-stat-card text-center">
+                                <div class="hero-stat-number text-warning hero-counter" data-target="<?= (int)$stats['scheduled_elections'] ?>">0</div>
+                                <div class="text-muted small fw-medium">Upcoming Polls</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="small text-muted d-flex align-items-center gap-2 mt-3 pt-2 border-top">
+                        <i class="bi bi-shield-lock-fill text-success fs-5"></i>
+                        <span style="font-size: 0.78rem;">Decoupled ballot records &bull; DB constraint uniqueness protection</span>
+                    </div>
                 </div>
             </div>
         </div>

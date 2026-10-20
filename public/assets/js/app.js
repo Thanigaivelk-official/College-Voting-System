@@ -49,4 +49,54 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // 4. Hero section smooth counter animation
+    const counters = document.querySelectorAll('.hero-counter');
+    if (counters.length > 0) {
+        let hasAnimated = false;
+        const animateCounters = () => {
+            if (hasAnimated) return;
+            hasAnimated = true;
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+                if (target <= 0) {
+                    counter.textContent = '0';
+                    return;
+                }
+                const duration = 1500; // ms
+                const startTime = performance.now();
+                
+                const updateCount = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease-out cubic curve: 1 - (1 - t)^3
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    const currentVal = Math.round(target * easeProgress);
+                    counter.textContent = currentVal.toLocaleString();
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.textContent = target.toLocaleString();
+                    }
+                };
+                requestAnimationFrame(updateCount);
+            });
+        };
+
+        if ('IntersectionObserver' in window) {
+            const heroObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        obs.disconnect();
+                    }
+                });
+            }, { threshold: 0.15 });
+            const heroSection = document.querySelector('.hero-wrapper') || counters[0];
+            heroObserver.observe(heroSection);
+        } else {
+            animateCounters();
+        }
+    }
 });
