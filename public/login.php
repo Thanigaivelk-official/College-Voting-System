@@ -110,8 +110,11 @@ require_once __DIR__ . '/../app/includes/header.php';
                         <i class="bi bi-stars text-warning"></i> Demo Credentials (Click to fill)
                     </div>
                     <div class="d-flex flex-column gap-1 small">
+                        <button type="button" class="btn btn-outline-secondary btn-sm text-start py-1 px-2 demo-btn" data-email="thanigaivel@college.edu" data-pass="Admin@123">
+                            <i class="bi bi-shield-fill-check text-danger me-1"></i> <strong>Admin (Thanigaivel):</strong> thanigaivel@college.edu / Admin@123
+                        </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm text-start py-1 px-2 demo-btn" data-email="admin@college.edu" data-pass="Admin@123">
-                            <i class="bi bi-shield-lock text-danger me-1"></i> <strong>Admin:</strong> admin@college.edu / Admin@123
+                            <i class="bi bi-shield-lock text-secondary me-1"></i> <strong>Admin:</strong> admin@college.edu / Admin@123
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm text-start py-1 px-2 demo-btn" data-email="arun@student.college.edu" data-pass="Student@123">
                             <i class="bi bi-check-circle text-success me-1"></i> <strong>Verified Voter:</strong> arun@student.college.edu / Student@123
