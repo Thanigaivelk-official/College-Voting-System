@@ -1,0 +1,236 @@
+/* ==========================================================================
+   College Voting System - Master Stylesheet
+   Design Philosophy: Clean, Modern Academic Portal, High Contrast & Clarity
+   ========================================================================== */
+
+:root {
+    --primary-navy: #1e3a8a;
+    --primary-dark: #0f172a;
+    --primary-hover: #1e40af;
+    --secondary-slate: #475569;
+    --bg-light: #f8fafc;
+    --surface-card: #ffffff;
+    --success-green: #10b981;
+    --danger-rose: #e11d48;
+    --warning-amber: #f59e0b;
+    --border-subtle: #e2e8f0;
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: #1e293b;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header & Navbar */
+.app-navbar {
+    background-color: var(--primary-dark);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+.navbar-brand-badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Sidebar Styling */
+.app-sidebar {
+    background: #ffffff;
+    border-right: 1px solid var(--border-subtle);
+    min-height: calc(100vh - 60px);
+}
+
+.sidebar-link {
+    color: var(--secondary-slate);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar-link:hover {
+    color: var(--primary-navy);
+    background-color: #eff6ff;
+}
+
+.sidebar-link.active {
+    color: #ffffff;
+    background-color: var(--primary-navy);
+    font-weight: 600;
+}
+
+.sidebar-link i {
+    font-size: 1.15rem;
+}
+
+/* Modern Card Styling */
+.card-academic {
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-academic:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+/* Status Badges */
+.badge-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.badge-open {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-scheduled {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.badge-closed {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.badge-published,
+.badge-results_published {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-cancelled {
+    background-color: #ffe4e6;
+    color: #9f1239;
+}
+
+.badge-draft {
+    background-color: #f3f4f6;
+    color: #6b7280;
+}
+
+/* Loading spinner overlay */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Candidate selection radio card */
+.candidate-radio-card input[type="radio"]:checked + label {
+    border-color: var(--primary-navy);
+    background-color: #eff6ff;
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.2);
+}
+
+.candidate-radio-card label {
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 2px solid transparent;
+    border-radius: 12px;
+}
+
+/* Responsive table fixes */
+@media (max-width: 768px) {
+    .app-sidebar {
+        min-height: unset;
+    }
+}
+
+/* Print receipt styles */
+@media print {
+    .app-navbar, footer, .btn, .no-print {
+        display: none !important;
+    }
+}
+
+/* Candidate Card */
+.candidate-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e2e8f0;
+}
+
+.candidate-avatar-placeholder {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background-color: #e2e8f0;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+/* Form Styles */
+.form-control:focus, .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Buttons */
+.btn-navy {
+    background-color: var(--primary-navy);
+    border-color: var(--primary-navy);
+    color: #ffffff;
+}
+
+.btn-navy:hover, .btn-navy:focus {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: #ffffff;
+}
+
+/* Progress bar */
+.progress-vote {
+    height: 10px;
+    border-radius: 6px;
+}
+
+/* Footer */
+footer.app-footer {
+    margin-top: auto;
+    background-color: #ffffff;
+    border-top: 1px solid var(--border-subtle);
+    padding: 18px 0;
+    font-size: 0.875rem;
+    color: var(--secondary-slate);
+}
