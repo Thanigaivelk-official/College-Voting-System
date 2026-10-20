@@ -13,5 +13,5 @@ initSession();
 
 if (!Auth::check()) {
     set_flash('warning', 'Please log in to access this page.');
-    redirect(base_url('login.php'));
+    redirect(public_url('login.php'));
 }

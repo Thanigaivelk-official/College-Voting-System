@@ -13,7 +13,7 @@ initSession();
 
 if (!Auth::check()) {
     set_flash('warning', 'Please log in with administrator credentials.');
-    redirect(base_url('login.php'));
+    redirect(public_url('login.php'));
 }
 
 if (!Auth::isAdmin()) {

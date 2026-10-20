@@ -45,7 +45,7 @@ $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         <hr class="my-3 text-muted">
 
         <div class="px-2">
-            <a href="<?= base_url('../public/logout.php') ?>" class="sidebar-link text-danger">
+            <a href="<?= public_url('logout.php') ?>" class="sidebar-link text-danger">
                 <i class="bi bi-box-arrow-right"></i> Sign Out
             </a>
         </div>

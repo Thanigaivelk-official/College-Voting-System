@@ -54,10 +54,10 @@ if ($isLoggedIn && $currentUser) {
 <!-- Top Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark app-navbar py-2 sticky-top">
     <div class="container-fluid px-3 px-md-4">
-        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="<?= base_url('index.php') ?>">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="<?= $isAdmin ? admin_url('dashboard.php') : public_url('index.php') ?>">
             <i class="bi bi-box2-check-fill text-warning fs-4"></i>
             <span>College Voting System</span>
-            <span class="navbar-brand-badge d-none d-sm-inline-block">Academic Portal</span>
+            <span class="navbar-brand-badge d-none d-sm-inline-block"><?= $isAdmin ? 'Admin Commission' : 'Academic Portal' ?></span>
         </a>
 
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#appNav">
@@ -67,16 +67,16 @@ if ($isLoggedIn && $currentUser) {
         <div class="collapse navbar-collapse" id="appNav">
             <ul class="navbar-nav ms-auto align-items-center gap-1 gap-lg-2">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('elections.php') ?>"><i class="bi bi-calendar3 me-1"></i> Elections</a>
+                    <a class="nav-link" href="<?= $isAdmin ? admin_url('elections.php') : public_url('elections.php') ?>"><i class="bi bi-calendar3 me-1"></i> Elections</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('results.php') ?>"><i class="bi bi-trophy me-1"></i> Results</a>
+                    <a class="nav-link" href="<?= $isAdmin ? admin_url('results.php') : public_url('results.php') ?>"><i class="bi bi-trophy me-1"></i> Results</a>
                 </li>
 
                 <?php if ($isLoggedIn): ?>
                     <!-- Notification Bell -->
                     <li class="nav-item">
-                        <a class="nav-link position-relative px-2" href="<?= base_url('notifications.php') ?>" title="Notifications">
+                        <a class="nav-link position-relative px-2" href="<?= public_url('notifications.php') ?>" title="Notifications">
                             <i class="bi bi-bell fs-5"></i>
                             <?php if ($unreadNotifications > 0): ?>
                                 <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
@@ -99,24 +99,24 @@ if ($isLoggedIn && $currentUser) {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                             <?php if ($isAdmin): ?>
-                                <li><a class="dropdown-item" href="<?= base_url('../admin/dashboard.php') ?>"><i class="bi bi-speedometer2 me-2"></i> Admin Dashboard</a></li>
-                                <li><a class="dropdown-item" href="<?= base_url('../admin/elections.php') ?>"><i class="bi bi-sliders me-2"></i> Manage Elections</a></li>
-                                <li><a class="dropdown-item" href="<?= base_url('../admin/students.php') ?>"><i class="bi bi-people me-2"></i> Manage Students</a></li>
+                                <li><a class="dropdown-item" href="<?= admin_url('dashboard.php') ?>"><i class="bi bi-speedometer2 me-2"></i> Admin Dashboard</a></li>
+                                <li><a class="dropdown-item" href="<?= admin_url('elections.php') ?>"><i class="bi bi-sliders me-2"></i> Manage Elections</a></li>
+                                <li><a class="dropdown-item" href="<?= admin_url('students.php') ?>"><i class="bi bi-people me-2"></i> Manage Students</a></li>
                             <?php else: ?>
-                                <li><a class="dropdown-item" href="<?= base_url('dashboard.php') ?>"><i class="bi bi-speedometer2 me-2"></i> Voter Dashboard</a></li>
-                                <li><a class="dropdown-item" href="<?= base_url('profile.php') ?>"><i class="bi bi-person me-2"></i> My Profile</a></li>
-                                <li><a class="dropdown-item" href="<?= base_url('history.php') ?>"><i class="bi bi-clock-history me-2"></i> Voting History</a></li>
+                                <li><a class="dropdown-item" href="<?= public_url('dashboard.php') ?>"><i class="bi bi-speedometer2 me-2"></i> Voter Dashboard</a></li>
+                                <li><a class="dropdown-item" href="<?= public_url('profile.php') ?>"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="<?= public_url('history.php') ?>"><i class="bi bi-clock-history me-2"></i> Voting History</a></li>
                             <?php endif; ?>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="<?= base_url('logout.php') ?>"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</a></li>
+                            <li><a class="dropdown-item text-danger" href="<?= public_url('logout.php') ?>"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-outline-light btn-sm px-3" href="<?= base_url('login.php') ?>">Sign In</a>
+                        <a class="btn btn-outline-light btn-sm px-3" href="<?= public_url('login.php') ?>">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-warning btn-sm px-3 fw-semibold text-dark" href="<?= base_url('register.php') ?>">Register</a>
+                        <a class="btn btn-warning btn-sm px-3 fw-semibold text-dark" href="<?= public_url('register.php') ?>">Register</a>
                     </li>
                 <?php endif; ?>
             </ul>

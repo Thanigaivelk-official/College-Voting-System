@@ -16,7 +16,7 @@ require_once __DIR__ . '/../app/repositories/StudentRepository.php';
 initSession();
 
 if (Auth::check()) {
-    redirect(base_url(Auth::isAdmin() ? '../admin/dashboard.php' : 'dashboard.php'));
+    redirect(Auth::isAdmin() ? admin_url('dashboard.php') : public_url('dashboard.php'));
 }
 
 $db = Database::getConnection();

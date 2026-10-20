@@ -49,16 +49,46 @@ function get_flash(): ?array {
  */
 function base_url(string $path = ''): string {
     $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-    // Check if running from root or public folder
     $base = rtrim(dirname($scriptName), '/\\');
-    
-    // Normalize path
     $trimmedPath = ltrim($path, '/');
     if ($trimmedPath === '') {
         return $base ?: '/';
     }
+
+    // If requesting static assets or uploads from within admin or other subfolder,
+    // route to public directory where static assets reside.
+    if (str_starts_with($trimmedPath, 'assets/') || str_starts_with($trimmedPath, 'uploads/')) {
+        return public_url($trimmedPath);
+    }
     
     return ($base === '' || $base === '/') ? '/' . $trimmedPath : $base . '/' . $trimmedPath;
+}
+
+/**
+ * Get URL to public portal routes and assets
+ */
+function public_url(string $path = ''): string {
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $trimmed = ltrim($path, '/');
+    if (preg_match('#^(.*?)/(admin|public)(/|$)#', $scriptName, $matches)) {
+        $root = $matches[1];
+        return ($root === '' ? '' : $root) . '/public' . ($trimmed !== '' ? '/' . $trimmed : '/');
+    }
+    $base = rtrim(dirname($scriptName), '/\\');
+    return ($base === '' || $base === '/') ? '/' . $trimmed : $base . '/' . $trimmed;
+}
+
+/**
+ * Get URL to admin portal routes
+ */
+function admin_url(string $path = ''): string {
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $trimmed = ltrim($path, '/');
+    if (preg_match('#^(.*?)/(admin|public)(/|$)#', $scriptName, $matches)) {
+        $root = $matches[1];
+        return ($root === '' ? '' : $root) . '/admin' . ($trimmed !== '' ? '/' . $trimmed : '/');
+    }
+    return '/admin' . ($trimmed !== '' ? '/' . $trimmed : '/');
 }
 
 /**

@@ -16,7 +16,7 @@ initSession();
 
 // Redirect if already logged in
 if (Auth::check()) {
-    redirect(base_url(Auth::isAdmin() ? '../admin/dashboard.php' : 'dashboard.php'));
+    redirect(Auth::isAdmin() ? admin_url('dashboard.php') : public_url('dashboard.php'));
 }
 
 $error = null;
@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result['success']) {
             set_flash('success', 'Welcome back! You have successfully signed in.');
             if ($result['role'] === 'admin') {
-                redirect(base_url('../admin/dashboard.php'));
+                redirect(admin_url('dashboard.php'));
             } else {
-                redirect(base_url('dashboard.php'));
+                redirect(public_url('dashboard.php'));
             }
         } else {
             $error = $result['error'];

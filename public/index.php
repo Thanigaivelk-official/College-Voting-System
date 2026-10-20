@@ -41,7 +41,7 @@ require_once __DIR__ . '/../app/includes/header.php';
             </p>
             <div class="d-flex flex-wrap gap-2">
                 <?php if (Auth::check()): ?>
-                    <a href="<?= base_url(Auth::isAdmin() ? '../admin/dashboard.php' : 'dashboard.php') ?>" class="btn btn-navy btn-lg px-4 shadow-sm">
+                    <a href="<?= Auth::isAdmin() ? admin_url('dashboard.php') : public_url('dashboard.php') ?>" class="btn btn-navy btn-lg px-4 shadow-sm">
                         <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard
                     </a>
                 <?php else: ?>
